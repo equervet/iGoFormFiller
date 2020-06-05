@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Filler Test</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <style>
+    div[contenteditable] {
+      background-color: #ffe;
+      border: 2px dashed #ffc600;
+      line-height: 2em;
+      min-height: 2.3em;
+    }
+
+    .btn-group,
+    .btn-group-vertical {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .radio-group .btn-default.active,
+    .js-check-btn.active {
+      background-color: rgb(220, 237, 255);
+      box-shadow: none;
+    }
+
+    .radio-group .btn-default:not(.is-required),
+    .dropdown-toggle.btn-default:not(.is-required),
+    .js-check-btn:not(.is-required),
+    .open>.dropdown-toggle.btn-default {
+      background-color: rgb(255, 255, 255);
+    }
+
+    .js-check-btn,
+    .js-check-btn:hover,
+    .js-check-btn:focus,
+    .js-check-btn.active,
+    .radio-group .btn-default,
+    .dropdown-toggle.btn-default,
+    .open>.dropdown-toggle.btn-default {
+      color: rgb(84, 88, 90);
+      font-weight: normal;
+      box-shadow: none;
+      border-color: rgb(194, 197, 200);
+    }
+
+    .radio-group .btn,
+    .js-check-btn,
+    .dropdown-toggle {
+      border-width: 1px;
+    }
+
+    .btn-group>.btn,
+    .btn-group-vertical>.btn {
+      position: relative;
+      float: left;
+    }
+
+    .btn-sm,
+    .btn-group-sm>.btn {
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+
+    .btn {
+      font-family: iPipelineSemibold, Helvetica, Arial, sans-serif;
+      border-width: 1px 1px 2px;
+    }
+
+    .btn-default {
+      color: rgb(32, 112, 152);
+      background-color: rgb(240, 240, 241);
+      border-color: rgb(32, 112, 152);
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('#serialize-form').on('click', function () {
+        $('#form-data').html(
+          $('#form')
+            .serialize()
+            .replace(/&/g, '<br>')
+            .replace(/=/g, ' = '),
+        );
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+
+      $('#js-hide').hide();
+
+      $('input[type="checkbox"]').on('change', function () {
+        console.log('Checkbox Change Event', this.name, this.value, this.checked);
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Form Filler Test</h1>
+    <form id="form" class="form-horizontal">
+
+      <fieldset>
+        <legend>iGo specifics</legend>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Zip US (pattern attribute)</label>
+          <div class="col-sm-9">
+            <input maskedit="" type="text" class="form-control input-sm is-required" id="flda_24" name="flda_24" alt_id="SCND_Zip" pattern="\d*" autocomplete="smartystreets">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Address (smartstreet with 40 max length attribute)</label>
+          <div class="col-sm-9">
+            <input type="text" id="flda_27" name="flda_27" class="form-control input-sm" alt_id="SCND_Address" maxlength="40" value="" autocomplete="smartystreets" liveaddress="SCND_Address">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Address line 1 (smartstreet with 40 max length attribute)</label>
+          <div class="col-sm-9">
+            <input type="text" id="flda_10" name="flda_10" class="form-control input-sm" alt_id="Own_ADDR_Line1" maxlength="40" value="" autocomplete="smartystreets" liveaddress="Own_ADDR_Line1">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Street line 1 (smartstreet with 40 max length attribute)</label>
+          <div class="col-sm-9">
+            <input type="text" id="flda_26" name="flda_26" class="form-control input-sm" alt_id="ADDR_Street" maxlength="40" value="" autocomplete="smartystreets" liveaddress="ADDR_Street">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Issue date (no pattern, 85 max length attribute)</label>
+          <div class="col-sm-9">
+            <input type="text" id="flda_21" name="flda_21" class="form-control input-sm" alt_id="AVN_IssueDates" maxlength="85" value="">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Weight (pattern text field)</label>
+          <div class="col-sm-9">
+            <input number="" type="text" class="form-control input-sm is-required" id="flda_37" name="flda_37" alt_id="MED_Q1_Wt" pattern="\d*">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Phone number (pattern text field)</label>
+          <div class="col-sm-9">
+            <input maskedit="" type="text" class="form-control input-sm is-required" id="flda_15" name="flda_15" alt_id="Phone_Home" pattern="\d*">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">SSN (pattern text field)</label>
+          <div class="col-sm-9">
+            <input maskedit="" type="text" class="form-control input-sm" id="flda_71" name="flda_71" alt_id="PB_SSN" pattern="\d*">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Yes/No radiobutton</label>
+          <div class="col-sm-9">
+            <div role="group" class="btn-group radio-group  btn-group-sm ">
+              <label class="btn btn-default">
+                <div class="checkbox-caption-wrapping ">
+                  <span>
+                    <input type="radio" class="top-aligned" value="Yes" id="rdo_78_1" name="rdo_78_1" alt_id="PBDifferentThanOwnerPB_1">
+                  </span>
+                  <span id="lbl_78_1">Yes</span>
+                </div>
+              </label>
+              <label class="btn btn-default active">
+                <div class="checkbox-caption-wrapping ">
+                  <span>
+                    <input type="radio" class="top-aligned" value="No" id="rdo_78_2" name="rdo_78_2" alt_id="PBDifferentThanOwnerPB_2">
+                  </span>
+                  <span id="lbl_78_2">No</span>
+                </div>
+              </label></div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">EFT routing # 9 digits (pattern text field)</label>
+          <div class="col-sm-9">
+            <input maskedit="" type="text" class="form-control input-sm field-level-error" id="flda_187" name="flda_187" alt_id="EFT_RoutingNumber" pattern="\d*" style="background: rgb(255, 255, 255);">
+            </label></div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">US State (alt-id matching)</label>
+          <div class="col-sm-9">
+            <select id="lb_60" name="lb_60" alt_id="PB_ADDR_State" class="form-control  input-sm ">
+              <option value=""></option>
+              <option value="AK">ALASKA</option>
+              <option value="AL">ALABAMA</option>
+              <option value="AZ">ARIZONA</option>
+              <option value="AR">ARKANSAS</option>
+              <option value="CA">CALIFORNIA</option>
+              <option value="CO">COLORADO</option>
+              <option value="CT">CONNECTICUT</option>
+              <option value="DE">DELAWARE</option>
+              <option value="DC">DIST. OF COLUMBIA</option>
+              <option value="FL">FLORIDA</option>
+              <option value="GA">GEORGIA</option>
+              <option value="GU">GUAM</option>
+              <option value="HI">HAWAII</option>
+              <option value="ID">IDAHO</option>
+              <option value="IL">ILLINOIS</option>
+              <option value="IN">INDIANA</option>
+              <option value="IA">IOWA</option>
+              <option value="KS">KANSAS</option>
+              <option value="KY">KENTUCKY</option>
+              <option value="LA">LOUISIANA</option>
+              <option value="ME">MAINE</option>
+              <option value="MD">MARYLAND</option>
+              <option value="MA">MASSACHUSETTS</option>
+              <option value="MI">MICHIGAN</option>
+              <option value="MN">MINNESOTA</option>
+              <option value="MS">MISSISSIPPI</option>
+              <option value="MO">MISSOURI</option>
+              <option value="MT">MONTANA</option>
+              <option value="NE">NEBRASKA</option>
+              <option value="NV">NEVADA</option>
+              <option value="NH">NEW HAMPSHIRE</option>
+              <option value="NJ">NEW JERSEY</option>
+              <option value="NM">NEW MEXICO</option>
+              <option value="NY">NEW YORK</option>
+              <option value="NC">NORTH CAROLINA</option>
+              <option value="ND">NORTH DAKOTA</option>
+              <option value="OH">OHIO</option>
+              <option value="OK">OKLAHOMA</option>
+              <option value="OR">OREGON</option>
+              <option value="PA">PENNSYLVANIA</option>
+              <option value="PR">PUERTO RICO</option>
+              <option value="RI">RHODE ISLAND</option>
+              <option value="SC">SOUTH CAROLINA</option>
+              <option value="SD">SOUTH DAKOTA</option>
+              <option value="TN">TENNESSEE</option>
+              <option value="TX">TEXAS</option>
+              <option value="UT">UTAH</option>
+              <option value="VT">VERMONT</option>
+              <option value="VI">VIRGIN ISLANDS</option>
+              <option value="VA">VIRGINIA</option>
+              <option value="WA">WASHINGTON</option>
+              <option value="WV">WEST VIRGINIA</option>
+              <option value="WI">WISCONSIN</option>
+              <option value="WY">WYOMING</option>
+            </select>
+            </label></div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Face amount (alt-id matching, pattern text field)</label>
+          <div class="col-sm-9">
+            <input data-toggle="popover" data-html="true" data-placement="auto" data-trigger="focus" data-content="No decimals allowed" number="" type="text" class="form-control input-sm" id="flda_39" name="flda_39" alt_id="FaceAmount" pattern="\d*" data-original-title="" title="">
+            </label></div>
+        </div>
+
+      </fieldset>
+
+
+
+
+
+      <br />
+      <fieldset>
+        <legend>Text Type</legend>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Captcha (ignored)</label>
+          <div class="col-sm-9">
+            <input type="text" name="captcha" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">First Name (readonly)</label>
+          <div class="col-sm-9">
+            <input type="text" name="first_name" class="form-control" placeholder="Your first name" readonly />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">First Name (readonly, with value)</label>
+          <div class="col-sm-9">
+            <input type="text" name="first_name" class="form-control" value="Steve" readonly />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">First Name (disabled)</label>
+          <div class="col-sm-9">
+            <input type="text" name="first_name" class="form-control" placeholder="Your first name" disabled />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">First Name (disabled, with value)</label>
+          <div class="col-sm-9">
+            <input type="text" name="first_name" class="form-control" value="Steve" disabled />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">First Name (input without type)</label>
+          <div class="col-sm-9">
+            <input name="first_name" class="form-control" placeholder="Your first name" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">First Name (input with empty type)</label>
+          <div class="col-sm-9">
+            <input type="" name="first_name" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">First Name</label>
+          <div class="col-sm-9">
+            <input type="text" name="first_name" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">First Name (with value)</label>
+          <div class="col-sm-9">
+            <input type="text" name="first_name" value="Steve" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Last Name</label>
+          <div class="col-sm-9">
+            <input type="text" name="last_name" class="form-control" placeholder="Your last name" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Full Name</label>
+          <div class="col-sm-9">
+            <input type="text" name="full_name" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Username</label>
+          <div class="col-sm-9">
+            <input type="text" name="username" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Email Address</label>
+          <div class="col-sm-9">
+            <input type="text" name="email_address_text" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Email Address (retyped)</label>
+          <div class="col-sm-9">
+            <input type="text" name="confirm_email_address" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Organization</label>
+          <div class="col-sm-9">
+            <input type="text" name="organization" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Telephone</label>
+          <div class="col-sm-9">
+            <input type="text" name="telephone_text" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Number</label>
+          <div class="col-sm-9">
+            <input type="text" name="number_text" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Zip Code</label>
+          <div class="col-sm-9">
+            <input type="text" name="zip_text" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Date</label>
+          <div class="col-sm-9">
+            <input type="text" name="date_of_birth_text" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Website</label>
+          <div class="col-sm-9">
+            <input type="text" name="website_text" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Matches Nothing</label>
+          <div class="col-sm-9">
+            <input type="text" name="no_match" class="form-control" />
+          </div>
+        </div>
+      </fieldset>
+
+      <br />
+      <fieldset>
+        <legend>Other Types</legend>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Password</label>
+          <div class="col-sm-9">
+            <input type="password" name="password" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Repeat Password</label>
+          <div class="col-sm-9">
+            <input type="password" name="confirm_password" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Email</label>
+          <div class="col-sm-9">
+            <input type="email" name="email_address" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Confirm Email</label>
+          <div class="col-sm-9">
+            <input type="email" name="repeat_email_address" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Credit Card</label>
+          <div class="col-sm-9">
+            <input type="tel" name="credit_card" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Number</label>
+          <div class="col-sm-9">
+            <input type="number" name="number" class="form-control" min="100" max="500" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Range</label>
+          <div class="col-sm-9">
+            <input type="range" name="number_range" class="form-control" value="0" min="0" max="100" step="5" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Search</label>
+          <div class="col-sm-9">
+            <input type="search" name="keywords_search" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Website</label>
+          <div class="col-sm-9">
+            <input type="url" name="website" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Date</label>
+          <div class="col-sm-9">
+            <input type="date" name="date_of_birth" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Date/Time Local</label>
+          <div class="col-sm-9">
+            <input type="datetime-local" name="date_time_local" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Month</label>
+          <div class="col-sm-9">
+            <input type="month" name="month" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Time</label>
+          <div class="col-sm-9">
+            <input type="time" name="time" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Week</label>
+          <div class="col-sm-9">
+            <input type="week" name="week" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Telephone</label>
+          <div class="col-sm-9">
+            <input type="tel" name="telephone" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Color</label>
+          <div class="col-sm-9">
+            <input type="color" name="color" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Drop Down</label>
+          <div class="col-sm-9">
+            <select name="favorite_color_dropdown" class="form-control">
+              <option></option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+              <option value="yellow">Yellow</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Drop Down (with value)</label>
+          <div class="col-sm-9">
+            <select name="favorite_color_dropdown" class="form-control">
+              <option></option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue" selected>Blue</option>
+              <option value="yellow">Yellow</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Drop Down (disabled)</label>
+          <div class="col-sm-9">
+            <select name="favorite_color_dropdown" class="form-control">
+              <option></option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+              <option value="yellow">Yellow</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Drop Down (disabled, with value)</label>
+          <div class="col-sm-9">
+            <select name="favorite_color_dropdown" class="form-control" disabled>
+              <option></option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue" selected>Blue</option>
+              <option value="yellow">Yellow</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Drop Down (with disabled value)</label>
+          <div class="col-sm-9">
+            <select name="favorite_color_dropdown" class="form-control">
+              <option></option>
+              <option value="red" disabled>Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+              <option value="yellow" disabled>Yellow</option>
+              <option value="black">Black</option>
+              <option value="orange" disabled>Orange</option>
+              <option value="pink" disabled>Pink</option>
+              <option value="white">White</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Drop Down (disabled selected value)</label>
+          <div class="col-sm-9">
+            <select name="favorite_color_dropdown" class="form-control">
+              <option></option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue" selected disabled>Blue</option>
+              <option value="yellow">Yellow</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Radio</label>
+          <div class="col-sm-9">
+            <div class="radio">
+              <label><input type="radio" name="favorite_color_radio" value="red" /> Red</label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="favorite_color_radio" value="green" /> Green</label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="favorite_color_radio" value="blue" /> Blue</label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="favorite_color_radio" value="yellow" /> Yellow</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Checkbox</label>
+          <div class="col-sm-9">
+            <div class="checkbox">
+              <label><input type="checkbox" name="favorite_color_checkbox" value="red" /> Red</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" name="favorite_color_checkbox" value="green" /> Green</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" name="favorite_color_checkbox" value="blue" /> Blue</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" name="favorite_color_checkbox" value="yellow" /> Yellow</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Text Area</label>
+          <div class="col-sm-9">
+            <textarea name="bio" class="form-control" rows="7"></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Text Area Match Nothing</label>
+          <div class="col-sm-9">
+            <textarea name="text_no_match" class="form-control" rows="7" maxlength="100"></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Alphanumeric</label>
+          <div class="col-sm-9">
+            <input type="text" name="alnum" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">contenteditable</label>
+          <div class="col-sm-9">
+            <div class="random_text" contenteditable></div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Always Checked</label>
+          <div class="col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="accept_terms" value="1" /> I agree to the terms and conditions
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row" id="js-hide">
+          <label class="col-form-label col-sm-3">JavaScript Hidden</label>
+          <div class="col-sm-9">
+            <input type="text" name="email_js_hidden" class="form-control" />
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-group row">
+        <div class="col-xs-offset-3 col-xs-9">
+          <button type="button" id="serialize-form" class="btn btn-primary">Serialize Form</button>
+          <input type="submit" class="btn btn-primary" value="Submit" />
+          <input type="reset" class="btn btn-primary" value="Reset Values" />
+        </div>
+      </div>
+      <input type="hidden" name="email_hidden" />
+    </form>
+    <iframe src="plain.html" style="width:100%;height:500px;"></iframe>
+    <br />
+    <div id="form-data"></div>
+    <br />
+  </div>
+</body>
+
+</html>
